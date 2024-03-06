@@ -158,3 +158,27 @@ Under Linux, insert an unused USB stick. Assuming the USB stick takes device
 $ sudo dd if=build/tmp/deploy/images/iot2000/iot2000-example-image-iot2000.wic \
           of=/dev/sda bs=4M oflag=sync
 ```
+
+Running the Image in qemu 
+================================
+
+First you have to open a shell in the kas-Container:
+
+```shell
+./kas-container shell meta-iot2000/kas-example.yml
+```
+
+Now in the kas-shell run first:
+
+```shell
+bitbake qemu-helper-native
+```
+
+Afterward simply start qemu:
+
+```shell
+runqemu slirp
+```
+
+To exit qemu press `Ctrl-A X`
+

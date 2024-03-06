@@ -1,0 +1,77 @@
+From d0a9be22a6585f873c5e110da6d1c342409efa88 Mon Sep 17 00:00:00 2001
+From: Kas User <kas@example.com>
+Date: Thu, 23 Nov 2023 15:01:46 +0000
+Subject: [PATCH] Orange LED for IOT2000 now selectable.
+
+---
+ hardware/intel/mraa-gpio-dout.html |  6 ++++++
+ hardware/intel/mraa-gpio-dout.js   | 23 ++++++++++++++++++++---
+ 2 files changed, 26 insertions(+), 3 deletions(-)
+
+diff --git a/hardware/intel/mraa-gpio-dout.html b/hardware/intel/mraa-gpio-dout.html
+index a2e6fd7..b3314b9 100644
+--- a/hardware/intel/mraa-gpio-dout.html
++++ b/hardware/intel/mraa-gpio-dout.html
+@@ -16,6 +16,9 @@
+         icon: "arrow.png",
+         align: "right",
+         label: function() {
++            if (this.pin === "16") {
++                return this.name || "Orange LED";
++            }
+             if (this.pin === "15") {
+                 return this.name || "Red LED";
+             }
+@@ -55,6 +58,9 @@
+                 if (data === 2040) {
+                     $('#node-input-pin').append($("<option></option>").attr("value", 15).text("Red LED"));
+                 }
++                if (data === 2040) {
++                    $('#node-input-pin').append($("<option></option>").attr("value", 16).text("Orange LED"));
++                }				
+                 $('#node-input-pin').val(pinnow);
+             });
+             $.getJSON('mraa-version/'+this.id,function(data) {
+diff --git a/hardware/intel/mraa-gpio-dout.js b/hardware/intel/mraa-gpio-dout.js
+index ec54e9e..7add600 100644
+--- a/hardware/intel/mraa-gpio-dout.js
++++ b/hardware/intel/mraa-gpio-dout.js
+@@ -9,10 +9,27 @@ module.exports = function(RED) {
+         this.set = n.set;
+         this.level = Number(n.level);
+         var node = this;
+-        if (this.pin === 15) {
++		//Orange
++        if (this.pin === 16) {
++			this.p = new m.Gpio(13);  // special for onboard LED v1
++            this.p.mode(m.PIN_GPIO);
++            this.p.dir(m.DIR_OUT);
++            this.fd = fs.openSync("/sys/class/leds/mpio_uart_led:red:user/brightness", "w");
++            this.on("input", function(msg) {
++                if (msg.payload == "1" || msg.payload == "orange") {
++					fs.writeSync(node.fd, "1");
++					node.p.write(1);
++                }
++                else {
++                    fs.writeSync(node.fd, "0");
++					node.p.write(0);
++                }
++            });
++		//Red
++        } else if (this.pin === 15) {
+             this.fd = fs.openSync("/sys/class/leds/mpio_uart_led:red:user/brightness", "w");
+             this.on("input", function(msg) {
+-                if (msg.payload == "1") {
++                if (msg.payload == "1" || msg.payload == "red") {
+                     fs.writeSync(node.fd, "1");
+                 }
+                 else {
+@@ -33,7 +50,7 @@ module.exports = function(RED) {
+                 this.p.write(this.level);
+             }
+             this.on("input", function(msg) {
+-                if (msg.payload == "1") {
++                if (msg.payload == "1" || msg.payload == "green") {
+                     node.p.write(1);
+                 }
+                 else {
