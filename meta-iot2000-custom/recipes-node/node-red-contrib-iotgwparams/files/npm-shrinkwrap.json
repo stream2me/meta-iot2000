@@ -1,0 +1,9 @@
+{
+  "requires": true,
+  "lockfileVersion": 1,
+  "dependencies": {
+    "node-red-contrib-iotgwparams": {
+      "version": "file:/repo/custom-node-modules/node-red-contrib-iotgwparams-0.0.1.tgz"
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "requires": true,
+  "lockfileVersion": 1,
+  "dependencies": {
+    "node-red-contrib-iot2000-gpio": {
+      "version": "file:/repo/custom-node-modules/node-red-contrib-iot2000-gpio-1.0.1.tgz"
+    }
+  }
+}

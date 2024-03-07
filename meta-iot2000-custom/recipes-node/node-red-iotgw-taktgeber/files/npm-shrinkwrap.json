@@ -1,0 +1,9 @@
+{
+  "requires": true,
+  "lockfileVersion": 1,
+  "dependencies": {
+    "node-red-iotgw-taktgeber": {
+      "version": "file:/repo/custom-node-modules/node-red-iotgw-taktgeber-0.0.1.tgz"
+    }
+  }
+}
