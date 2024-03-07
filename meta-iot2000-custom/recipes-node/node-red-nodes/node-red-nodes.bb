@@ -17,7 +17,11 @@ RDEPENDS_${PN} += " \
     node-red-contrib-boolean-logic \
     node-red-contrib-opcua \
     node-red-contrib-modbus \
-    node-red-contrib-s7"
+    node-red-contrib-s7 \
+    node-red-contrib-iot2000-gpio \
+    node-red-contrib-iotgwparams \
+    node-red-iotgw-taktgeber \
+    "
 
 python do_compile() {
     import json
