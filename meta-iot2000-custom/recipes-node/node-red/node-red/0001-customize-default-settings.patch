@@ -1,0 +1,57 @@
+From ab1970bf66bc20adca2e3a98c8bad720a1807be9 Mon Sep 17 00:00:00 2001
+From: Kas User <kas@example.com>
+Date: Tue, 12 Mar 2024 15:23:40 +0000
+Subject: [PATCH] customize default settings
+
+---
+ settings.js | 20 ++++++++++----------
+ 1 file changed, 10 insertions(+), 10 deletions(-)
+
+diff --git a/settings.js b/settings.js
+index a39731f..15caaa3 100644
+--- a/settings.js
++++ b/settings.js
+@@ -72,7 +72,7 @@ module.exports = {
+ 
+     // To enabled pretty-printing of the flow within the flow file, set the following
+     //  property to true:
+-    //flowFilePretty: true,
++    flowFilePretty: true,
+ 
+     // By default, credentials are encrypted in storage using a generated key. To
+     // specify your own secret, set the following property.
+@@ -127,14 +127,14 @@ module.exports = {
+     // -----------------
+     // To password protect the Node-RED editor and admin API, the following
+     // property can be used. See http://nodered.org/docs/security.html for details.
+-    //adminAuth: {
+-    //    type: "credentials",
+-    //    users: [{
+-    //        username: "admin",
+-    //        password: "$2a$08$zZWtXTja0fB1pzD4sHCMyOCMYz2Z6dNbM6tl8sJogENOMcxWV9DN.",
+-    //        permissions: "*"
+-    //    }]
+-    //},
++    adminAuth: {
++        type: "credentials",
++        users: [{
++            username: "admin",
++            password: "$2a$08$zZWtXTja0fB1pzD4sHCMyOCMYz2Z6dNbM6tl8sJogENOMcxWV9DN.",
++            permissions: "*"
++        }]
++    },
+ 
+     // To password protect the node-defined HTTP endpoints (httpNodeRoot), or
+     // the static content (httpStatic), the following properties can be used.
+@@ -250,7 +250,7 @@ module.exports = {
+     // can be accessed in a function block as:
+     //    global.get("os")
+     functionGlobalContext: {
+-        // os:require('os'),
++         os:require('os')
+         // jfive:require("johnny-five"),
+         // j5board:require("johnny-five").Board({repl:false})
+     },
+-- 
+2.20.1
+
