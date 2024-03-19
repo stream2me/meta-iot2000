@@ -46,6 +46,7 @@ IMAGE_INSTALL += "connman connman-tools connman-tests connman-client"
 IMAGE_INSTALL += "haveged"
 IMAGE_INSTALL += "jq"
 IMAGE_INSTALL += "mc"
+IMAGE_INSTALL += "nginx"
 IMAGE_INSTALL += "customs"
 
 # causing excessive boot delays with Yocto 3.0

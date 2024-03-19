@@ -15,6 +15,7 @@ repos:
     layers:
       meta-networking:
       meta-python:
+      meta-webserver:
 
   meta-swupdate:
     url: https://github.com/sbabic/meta-swupdate
